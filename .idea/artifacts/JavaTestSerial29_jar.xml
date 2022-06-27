@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="JavaTestSerialNEW:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/JavaTestSerialNEW_jar</output-path>
+  <artifact type="jar" name="JavaTestSerial29:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JavaTestSerial29_jar</output-path>
     <root id="archive" name="JavaTestSerial.jar">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />

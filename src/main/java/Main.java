@@ -27,7 +27,7 @@ public class Main {
                     String tx_s = i + "";
                     if (args.length > 1) {
                         Process p = Runtime.getRuntime().exec("gpio write " + args[1] + " 1");
-                        //p.waitFor();
+                        p.waitFor();
                         serial.writeString(tx_s);
                     } else serial.writeString(tx_s);
 

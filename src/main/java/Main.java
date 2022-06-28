@@ -28,11 +28,11 @@ public class Main {
                     String pinOn = "gpio write " + args[1] + " 1";
                     String pinOff = "gpio write " + args[1] + " 0";
                     if (args.length > 1) {
-                        Process p = Runtime.getRuntime().exec(pinOn);
+                        Runtime r = Runtime.getRuntime();
+                        Process p = r.exec(pinOn);
                         p.waitFor();
                         serial.writeString(tx_s);
-                        Runtime.getRuntime().exec(pinOff);
-                        p.waitFor();
+                        r.exec(pinOff);
                     } else serial.writeString(tx_s);
                     System.out.println(s);
 

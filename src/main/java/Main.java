@@ -25,15 +25,15 @@ public class Main {
                 try {
                     String s = "Send: " + i;
                     String tx_s = i + "";
+                    String pinOn = "gpio write " + args[1] + " 1";
+                    String pinOff = "gpio write " + args[1] + " 0";
                     if (args.length > 1) {
-                        Process p = Runtime.getRuntime().exec("gpio write " + args[1] + " 1");
+                        Process p = Runtime.getRuntime().exec(pinOn);
                         p.waitFor();
                         serial.writeString(tx_s);
+                        Runtime.getRuntime().exec(pinOff);
+                        p.waitFor();
                     } else serial.writeString(tx_s);
-
-                    if (args.length > 1) {
-                        Runtime.getRuntime().exec("gpio write " + args[1] + " 0");
-                    }
                     System.out.println(s);
 
                     Thread.sleep(1000);

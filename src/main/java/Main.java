@@ -27,11 +27,13 @@ public class Main {
                     String tx_s = i + "asdiuhaseidhasdkjaosijdoqiwjueoqiwje]poasjde]opiqwjuroiqjwroiajwe]oqiwjuepo0qiwjeoijdoiasjdo[qiwjeo[qiwjoiqwje";
                     String pinOn = "gpio write " + args[1] + " 1";
                     String pinOff = "gpio write " + args[1] + " 0";
+                    byte[] bytes_tx = tx_s.getBytes();
                     if (args.length > 1) {
                         Runtime r = Runtime.getRuntime();
                         Process p = r.exec(pinOn);
                         p.waitFor();
-                        serial.writeString(tx_s);
+                        serial.writeBytes(bytes_tx);
+                        while(serial.getOutputBufferBytesCount() > 0);
                         r.exec(pinOff);
                     } else serial.writeString(tx_s);
                     System.out.println(s);

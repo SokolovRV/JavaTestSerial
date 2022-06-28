@@ -1,9 +1,10 @@
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
         SerialPort serial = new SerialPort(args[0]);
         try {
             serial.openPort();
@@ -21,9 +22,15 @@ public class Main {
             System.out.println("Serial is opened");
             System.out.println("Start test");
             for (int i = 1; i <= 10; i++) {
+                if (args.length > 1) {
+                    Runtime.getRuntime().exec("gpio write " + args[1] + " 1");
+                }
                 try {
                     String s = "Send: " + i;
                     serial.writeString(i + "");
+                    if (args.length > 1) {
+                        Runtime.getRuntime().exec("gpio write " + args[1] + " 0");
+                    }
                     System.out.println(s);
 
                     Thread.sleep(1000);

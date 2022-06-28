@@ -22,12 +22,15 @@ public class Main {
             System.out.println("Serial is opened");
             System.out.println("Start test");
             for (int i = 1; i <= 10; i++) {
-                if (args.length > 1) {
-                    Runtime.getRuntime().exec("gpio write " + args[1] + " 1");
-                }
                 try {
                     String s = "Send: " + i;
-                    serial.writeString(i + "");
+                    String tx_s = i + "";
+                    if (args.length > 1) {
+                        Process p = Runtime.getRuntime().exec("gpio write " + args[1] + " 1");
+                        //p.waitFor();
+                        serial.writeString(tx_s);
+                    } else serial.writeString(tx_s);
+
                     if (args.length > 1) {
                         Runtime.getRuntime().exec("gpio write " + args[1] + " 0");
                     }

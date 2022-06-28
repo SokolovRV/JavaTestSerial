@@ -24,7 +24,7 @@ public class Main {
             for (int i = 1; i <= 10; i++) {
                 try {
                     String s = "Send: " + i;
-                    String tx_s = i + "asdiuhaseidhasdkjaosijdoqiwjueoqiwje]poasjde]opiqwjuroiqjwroiajwe]oqiwjuepo0qiwjeoijdoiasjdo[qiwjeo[qiwjoiqwje";
+                    String tx_s = i + "1234567";
                     String pinOn = "gpio write " + args[1] + " 1";
                     String pinOff = "gpio write " + args[1] + " 0";
                     byte[] bytes_tx = tx_s.getBytes();

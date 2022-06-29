@@ -28,11 +28,13 @@ public class Main {
                     serial.writeBytes(bytes_tx);
                     System.out.println(s);
                     Thread.sleep(1000);
-                    byte[] bytes = serial.readBytes();
-                    System.out.print("Receive: ");
-                    for (int ii = 0; ii < bytes.length; ii++)
-                        System.out.print(String.format("0x%02X", bytes[ii]) + " ");
-                    System.out.println();
+                    if (serial.getInputBufferBytesCount() > 0) {
+                        byte[] bytes = serial.readBytes();
+                        System.out.print("Receive: ");
+                        for (int ii = 0; ii < bytes.length; ii++)
+                            System.out.print(String.format("0x%02X", bytes[ii]) + " ");
+                        System.out.println();
+                    } else System.out.println("Not receive");
                 } catch (SerialPortException | InterruptedException e) {
                     e.printStackTrace();
                 }

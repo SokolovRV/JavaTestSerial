@@ -24,26 +24,15 @@ public class Main {
             for (int i = 1; i <= 10; i++) {
                 try {
                     String s = "Send: " + i;
-                    String tx_s = i + "1234567";
-                    String pinOn = "gpio write " + args[1] + " 1";
-                    String pinOff = "gpio write " + args[1] + " 0";
-                    byte[] bytes_tx = tx_s.getBytes();
-                    if (args.length > 1) {
-                        Runtime r = Runtime.getRuntime();
-                        Process p = r.exec(pinOn);
-                        p.waitFor();
-                        serial.writeBytes(bytes_tx);
-                        while(serial.getOutputBufferBytesCount() > 0);
-                        r.exec(pinOff);
-                    } else serial.writeString(tx_s);
+                    byte[] bytes_tx = {(byte) 0x01, (byte) 0x01, (byte) 0x00, (byte) 0x01, (byte) 0x00, (byte) 0x01, (byte) 0xac, (byte) 0x0A};
+                    serial.writeBytes(bytes_tx);
                     System.out.println(s);
-
                     Thread.sleep(1000);
-
-                    if (serial.getInputBufferBytesCount() > 0) {
-                        byte[] bytes = serial.readBytes();
-                        System.out.println("Receive: "+ new String(bytes));
-                    }
+                    byte[] bytes = serial.readBytes();
+                    System.out.print("Receive: ");
+                    for (int ii = 0; ii < bytes.length; ii++)
+                        System.out.print(String.format("0x%02X", bytes[ii]) + " ");
+                    System.out.println();
                 } catch (SerialPortException | InterruptedException e) {
                     e.printStackTrace();
                 }
